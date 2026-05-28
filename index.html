@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aquaponics Biomass Food Security Simulator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+    <style>
+        body {
+            background-color: #0b1329;
+        }
+        .card-bg {
+            background-color: #1c2541;
+        }
+        .accent-green {
+            color: #10b981;
+        }
+        .accent-blue {
+            color: #3b82f6;
+        }
+        /* Custom styling untuk range slider */
+        input[type="range"] {
+            -webkit-appearance: none;
+            appearance: none;
+            background: #3a506b;
+            height: 6px;
+            border-radius: 5px;
+        }
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: #ffffff;
+            cursor: pointer;
+            box-shadow: 0 0 8px rgba(255,255,255,0.5);
+        }
+    </style>
+</head>
+<body class="text-gray-200 font-sans antialiased min-h-screen pb-12">
+
+    <header class="bg-slate-950/80 border-b border-indigo-900/50 px-6 py-5 sticky top-0 z-50 backdrop-blur-md">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+            <div>
+                <h1 class="text-2xl md:text-3xl font-extrabold tracking-tight text-white">
+                    Aquaponics Biomass Food Security Simulator
+                </h1>
+                <p class="text-indigo-400 text-xs md:text-sm mt-1 font-medium">
+                    Optimizing Tilapia Yield \( f(x) \) and Production Velocity Derivative \( f'(x) \) for Urban Food Security
+                </p>
+            </div>
+            <div>
+                <span class="bg-indigo-950 text-indigo-300 border border-indigo-700 text-xs font-bold px-3 py-1.5 rounded-full shadow-sm tracking-wide block">
+                    🟢 SFM: Food Security & Sustainable Yield Models
+                </span>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 md:px-6 mt-8 grid grid-cols-1 lg:grid-cols-12 gap-6">
+        
+        <div class="lg:col-span-5 space-y-6">
+            
+            <section class="card-bg p-6 rounded-2xl shadow-xl border border-gray-800/60">
+                <h2 class="text-lg font-bold text-white mb-4 flex items-center gap-2">
+                    <span>📖</span> The Food Security Context
+                </h2>
+                <div class="text-sm text-gray-300 space-y-3 leading-relaxed">
+                    <p>
+                        In urban aquaponics systems—a key technology for local food self-sufficiency (*Self-Sufficiency Level - SSL*) in Malaysia—Red Tilapia (*Oreochromis niloticus*) growth must be precisely monitored. Biomass accumulation follows a sigmoidal logistic pathway constrained by carrying capacity.
+                    </p>
+                    <p>
+                        The <strong>First Derivative \( f'(x) \)</strong> represents the <strong>instantaneous daily growth rate (grams/day)</strong>. In food security logistics, identifying the day where \( f'(x) \) peaks tells us exactly when the system reaches its maximum production velocity. Harvesting or thinning out fish stocks at the right derivative transition prevents metabolic waste, maximizes water-use efficiency, and stabilizes local food supply chains.
+                    </p>
+                </div>
+            </section>
+
+            <section class="card-bg p-6 rounded-2xl shadow-xl border border-gray-800/60">
+                <h2 class="text-lg font-bold text-white mb-4 flex items-center gap-2">
+<span>📊</span> Calculus-Based Yield Model
+                </h2>
+                
+                <div class="space-y-6 text-sm">
+                    <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-800">
+                        <span class="text-xs font-semibold text-blue-400 block mb-2 uppercase tracking-wider">Total Fish Weight \( f(x) \):</span>
+                        <div class="overflow-x-auto py-2 text-center text-base">
+                            $$f(x) = \frac{L}{1 + \beta \cdot e^{-r \cdot \alpha \cdot x}}$$
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-800">
+                        <span class="text-xs font-semibold text-emerald-400 block mb-2 uppercase tracking-wider">Derivative \( f'(x) \) (Biomass Velocity):</span>
+                        <div class="overflow-x-auto py-2 text-center text-base">
+                            $$f'(x) = \frac{L \cdot \beta \cdot (r \cdot \alpha) \cdot e^{-r \cdot \alpha \cdot x}}{(1 + \beta \cdot e^{-r \cdot \alpha \cdot x})^2}$$
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-x-4 gap-y-2 text-xs text-gray-400 pt-2 border-t border-slate-800">
+                        <div><strong class="text-gray-300">\( x \):</strong> Grow-out cycle timeline (Days 0 to 120)</div>
+                        <div><strong class="text-gray-300">\( L \):</strong> Carrying Capacity Asymptote (g)</div>
+                        <div><strong class="text-gray-300">\( \beta \):</strong> Fingerling scale constant (fixed 90)</div>
+                        <div><strong class="text-gray-300">\( r \):</strong> Specific intrinsic growth constant</div>
+                        <div class="col-span-2"><strong class="text-gray-300">\( \alpha \):</strong> Water Quality & Dissolved Oxygen Index (0.6 - 1.2)</div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="card-bg p-6 rounded-2xl shadow-xl border border-gray-800/60">
+                <h2 class="text-lg font-bold text-white mb-4 flex items-center gap-2">
+                    <span>🎛️</span> Aquaponics System Parameters
+                </h2>
+                <div class="space-y-5">
+                    <div>
+                        <div class="flex justify-between text-xs mb-1">
+                            <span class="text-gray-300 font-medium">System Carrying Capacity (\(L\))</span>
+                            <span class="text-amber-400 font-bold" id="lVal">800 g</span>
+                        </div>
+                        <input type="range" id="lSlider" min="600" max="1000" step="20" value="800" class="w-full">
+                        <span class="text-[10px] text-gray-500 block mt-1">Maximum target harvest weight allowed by tank volume and filter capacity.</span>
+                    </div>
+
+                    <div>
+                        <div class="flex justify-between text-xs mb-1">
+                            <span class="text-gray-300 font-medium">Intrinsic Growth Constant (\(r\))</span>
+                            <span class="text-amber-400 font-bold" id="rVal">0.055</span>
+                        </div>
+                        <input type="range" id="rSlider" min="0.040" max="0.070" step="0.002" value="0.055" class="w-full">
+                        <span class="text-[10px] text-gray-500 block mt-1">Genetic conversion capability of the fish strain under normal feed.</span>
+                    </div>
+
+                    <div>
+                        <div class="flex justify-between text-xs mb-1">
+                            <span class="text-gray-300 font-medium">Water Quality & DO Index (\(\alpha\))</span>
+                            <span class="text-amber-400 font-bold" id="alphaVal">1.00</span>
+                        </div>
+                        <input type="range" id="alphaSlider" min="0.60" max="1.20" step="0.05" value="1.00" class="w-full"<div class="flex justify-between text-[9px] text-gray-500 mt-1">
+                            <span>Poor Aeration (Anoxia Risk)</span>
+                            <span>Optimal DO / Smart Biofilter</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+
+        <div class="lg:col-span-7 space-y-6">
+            
+            <section class="card-bg p-6 rounded-2xl shadow-xl border border-gray-800/60">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 gap-2">
+                    <div>
+                        <h2 class="text-lg font-bold text-white flex items-center gap-2">
+                            <span class="w-2.5 h-2.5 rounded-full bg-indigo-500 animate-pulse"></span>
+                            Food Supply Production Trajectory
+                        </h2>
+                        <p class="text-xs text-gray-400">Click anywhere on the chart or drag the slider below to calculate instantaneous derivatives!</p>
+                    </div>
+                    <div class="flex gap-4 text-xs font-semibold bg-slate-900/40 p-2 rounded-xl border border-slate-800/80">
+                        <div class="flex items-center gap-1.5">
+                            <span class="w-3 h-1.5 rounded-sm bg-blue-500 inline-block"></span>
+                            <span class="text-blue-300">Biomass \(f(x)\) (g)</span>
+                        </div>
+                        <div class="flex items-center gap-1.5">
+                            <span class="w-3 h-1.5 rounded-sm bg-emerald-500 inline-block"></span>
+                            <span class="text-emerald-300">Rate \(f'(x)\) (g/day)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="relative h-[340px] w-full">
+                    <canvas id="aquaponicsChart"></canvas>
+                </div>
+
+                <div class="mt-4 pt-4 border-t border-slate-800/80">
+                    <div class="flex justify-between items-center mb-2">
+                        <label class="text-xs font-bold text-gray-400 uppercase tracking-wider">Interactive Timeline Tracker:</label>
+                        <span class="text-sm font-black text-emerald-400 bg-slate-950 border border-slate-800 px-3 py-1 rounded-md" id="dayIndicator">Day 60</span>
+                    </div>
+                    <input type="range" id="daySlider" min="0" max="120" step="2" value="60" class="w-full cursor-pointer">
+                </div>
+            </section>
+
+            <section class="card-bg p-6 rounded-2xl shadow-xl border border-gray-800/60 relative overflow-hidden">
+                
+                <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6">
+                    <div class="flex items-center gap-3">
+                        <span class="bg-indigo-600 text-white text-[10px] font-black px-2 py-1.5 rounded uppercase tracking-widest shadow-md">
+                            CALCULUS HUD
+                        </span>
+                        <div>
+                            <h3 class="text-base font-bold text-white">Dynamic Derivative Evaluator</h3>
+                            <p class="text-xs text-gray-400">Instantaneous bioscience performance metrics computed for Day <span id="hudDayLabel">60</span></p>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-slate-900/90 text-xs font-mono py-2.5 px-4 rounded-xl border border-slate-800 shadow-inner text-center w-full sm:w-auto" id="mathOutput">
+                        \( f'(\text{Day } 60) = 11.0 \text{ g/day} \)
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    <div class="bg-slate-900/50 p-4 rounded-xl border border-slate-800 flex flex-col justify-between">><span class="text-[11px] font-bold tracking-wider text-gray-400 uppercase block mb-1">Individual Weight \( f(x) \)</span>
+                        <div>
+                            <span class="text-3xl font-black text-blue-400" id="hudWeight">200</span>
+                            <span class="text-xs text-gray-400 font-semibold ml-0.5">g</span>
+                        </div>
+                        <span class="text-[10px] text-blue-500/80 font-medium mt-2" id="weightDesc">Exponential acceleration phase.</span>
+                    </div>
+
+                    <div class="bg-slate-900/50 p-4 rounded-xl border border-slate-800 flex flex-col justify-between">
+                        <span class="text-[11px] font-bold tracking-wider text-gray-400 uppercase block mb-1">Growth Velocity \( f'(x) \)</span>
+                        <div>
+                            <span class="text-3xl font-black text-emerald-400" id="hudDerivative">11.0</span>
+                            <span class="text-xs text-gray-400 font-semibold ml-0.5">g/day</span>
+                        </div>
+                        <span class="text-[10px] text-emerald-500/80 font-medium mt-2" id="derivDesc">High marginal increase.</span>
+                    </div>
+
+                    <div class="bg-slate-900/50 p-4 rounded-xl border border-slate-800 flex flex-col justify-between">
+                        <span class="text-[11px] font-bold tracking-wider text-gray-400 uppercase block mb-1">Food Security Status</span>
+                        <div class="text-lg font-bold text-amber-400 truncate mt-1" id="hudStatus">
+                            Vegetative Match
+                        </div>
+                        <span class="text-[10px] text-amber-500/80 font-medium mt-2" id="statusDesc">Nitrate output surging.</span>
+                    </div>
+                </div>
+
+                <div class="mt-5 bg-slate-900/80 p-4 rounded-xl border border-slate-800/80">
+                    <h4 class="text-xs font-bold text-emerald-400 tracking-wider uppercase mb-1.5 flex items-center gap-1.5">
+                        <span>ℹ️</span> Resource Efficiency & Food Security Insight
+                    </h4>
+                    <p class="text-xs md:text-sm text-gray-300 leading-relaxed font-normal" id="hudExplanation">
+                        Loading evaluation data...
+                    </p>
+                </div>
+
+            </section>
+
+        </div>
+    </main>
+
+    <footer class="max-w-7xl mx-auto px-6 text-center text-xs text-gray-600 mt-12 pt-6 border-t border-slate-900">
+        SFM: Food Security Ecosystem Model • Urban Agriculture Optimization Framework.
+    </footer>
+
+    <script>
+        // DOM Elements References
+        const lSlider = document.getElementById('lSlider');
+        const rSlider = document.getElementById('rSlider');
+        const alphaSlider = document.getElementById('alphaSlider');
+        const daySlider = document.getElementById('daySlider');
+
+        const lVal = document.getElementById('lVal');
+        const rVal = document.getElementById('rVal');
+        const alphaVal = document.getElementById('alphaVal');
+        const dayIndicator = document.getElementById('dayIndicator');
+
+        const hudDayLabel = document.getElementById('hudDayLabel');
+        const hudWeight = document.getElementById('hudWeight');
+        const hudDerivative = document.getElementById('hudDerivative');
+        const hudStatus = document.getElementById('hudStatus');
+        const mathOutput = document.getElementById('mathOutput');
+
+        const weightDesc = document.getElementById('weightDesc');
+        const derivDesc = document.getElementById('derivDesc');
+        const statusDesc = document.getElementById('statusDesc');
+        const hudExplanation = document.getElementById('hudExplanation');
+
+        const beta = 90; // Fixed Scaling parameter for 8-10g fingerling base
+
+        // Math Logic: Cumulative Function f(x)
+        function getCumulativeWeight(x, L, r, alpha) {
+            const compR = r * alpha;return L / (1 + beta * Math.exp(-compR * x));
+        }
+
+        // Math Logic: Analytical First Derivative f'(x)
+        function getGrowthRate(x, L, r, alpha) {
+            const compR = r * alpha;
+            const expTerm = Math.exp(-compR * x);
+            const numerator = L * beta * compR * expTerm;
+            const denominator = Math.pow(1 + beta * expTerm, 2);
+            return numerator / denominator;
+        }
+
+        // Generate Arrays for Data Charting
+        function generateDataset() {
+            const L = parseFloat(lSlider.value);
+            const r = parseFloat(rSlider.value);
+            const alpha = parseFloat(alphaSlider.value);
+
+            const weightData = [];
+            const rateData = [];
+            const labels = [];
+
+            for (let day = 0; day <= 120; day += 2) {
+                labels.push(day);
+                weightData.push(getCumulativeWeight(day, L, r, alpha));
+                rateData.push(getGrowthRate(day, L, r, alpha));
+            }
+
+            return { labels, weightData, rateData };
+        }
+
+        // Initialize Chart.js Context
+        const ctx = document.getElementById('aquaponicsChart').getContext('2d');
+        let datasets = generateDataset();
+
+        const aquaponicsChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: datasets.labels,
+                datasets: [
+                    {
+                        label: 'Total Weight f(x)',
+                        data: datasets.weightData,
+                        borderColor: '#3b82f6',
+                        backgroundColor: 'rgba(59, 130, 246, 0.03)',
+                        borderWidth: 3,
+                        yAxisID: 'yWeight',
+                        tension: 0.2,
+                        pointRadius: 0,
+                        pointHoverRadius: 6,
+                        fill: true
+                    },
+                    {
+                        label: 'Daily Growth Speed f\'(x)',
+                        data: datasets.rateData,
+                        borderColor: '#10b981',
+                        backgroundColor: 'transparent',
+                        borderWidth: 3,
+                        yAxisID: 'yRate',
+                        tension: 0.2,
+                        pointRadius: 0,
+                        pointHoverRadius: 6
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                interaction: {
+                    mode: 'index',
+                    intersect: false,
+                },
+                scales: {
+                    x: {
+                        grid: { color: 'rgba(255,255,255,0.03)' },
+                        ticks: { color: '#9ca3af', font: { size: 10 } },
+                        title: { display: true, text: 'Aquaponics Cycle Timeline (Days)', color: '#6b7280', font: { weight: 'bold', size: 11 } }
+                    },
+                    yWeight: {
+                        type: 'linear',
+                        position: 'left',
+                        min: 0,
+                        max: 1100,
+                        grid: { color: 'rgba(255,255,255,0.04)' },
+                        ticks: { color: '#3b82f6', font: { size: 10 } },
+                        title: { display: true, text: 'Fish Biomass Weight (grams)', color: '#3b82f6', font: { weight: 'bold', size: 11 } }
+                    },
+                    yRate: {
+                        type: 'linear',
+                        position: 'right',
+                        min: 0,
+                        max: 20,
+                        grid: { drawOnChartArea: false },
+                        ticks: { color: '#10b981', font: { size: 10 } },
+                        title: { display: true, text: 'Growth Derivative f\'(x) (g/day)', color: '#10b981', font: { weight: 'bold', size: 11 } }
+                    }
+                },
+                plugins: {
+                    legend: { display: false }
+                },
+                onClick: (e) => {const activePoints = aquaponicsChart.getElementsAtEventForMode(e, 'index', { intersect: false }, true);
+                    if (activePoints.length > 0) {
+                        const clickedIndex = activePoints[0].index;
+                        const clickedDay = clickedIndex * 2; // step is 2
+                        daySlider.value = clickedDay;
+                        syncCalculusHUD();
+                    }
+                }
+            }
+        });
+
+        // Update HUD Metrics dynamically with custom layout responses
+        function syncCalculusHUD() {
+            const day = parseInt(daySlider.value);
+            const L = parseFloat(lSlider.value);
+            const r = parseFloat(rSlider.value);
+            const alpha = parseFloat(alphaSlider.value);
+
+            // Update Labels
+            dayIndicator.innerText = Day ${day};
+            hudDayLabel.innerText = day;
+
+            // Run Calculations
+            const weight = getCumulativeWeight(day, L, r, alpha);
+            const rate = getGrowthRate(day, L, r, alpha);
+
+            // Render Results inside HUD
+            hudWeight.innerText = Math.round(weight);
+            hudDerivative.innerText = rate.toFixed(1);
+
+            // Dynamic LaTex HUD formula display
+            mathOutput.innerHTML = \\( f'(\\text{Day } ${day}) = ${rate.toFixed(1)} \\text{ g/day} \\);
+            MathJax.typesetPromise([mathOutput]);
+
+            // Phase and Security Engine based on standard Urban Aquaculture Security Indicators
+            let status = "";
+            let wDesc = "";
+            let rDesc = "";
+            let sDesc = "";
+            let explanation = "";
+
+            if (day <= 35) {
+                status = "Fingerling Acclimatization";
+                wDesc = "Low juvenile system weight.";
+                rDesc = "Growth rate slow but surging.";
+                sDesc = "Nutrient output low.";
+                explanation = "Pada fasa awal logistik ini, derivatif pertumbuhan $f'(x)$ adalah kecil. Kadar perkumuhan ammonia ikan belum mencukupi untuk menampung kepadatan tanaman hidroponik yang tinggi. Tambah bio-makanan tambahan untuk mengelakkan gangguan nutrien sayuran.";
+            } else if (day > 35 && day <= 75) {
+                status = "Inflection Peak (Max Efficiency)";
+                wDesc = "Rapid tissue accumulation.";
+                rDesc = "Derivative hits maximum peak!";
+                sDesc = "Perfect circular ecosystem.";
+                explanation = "<strong>Titik Infleksi Tercapai!</strong> Kadar pertumbuhan harian $f'(x)$ berada pada tahap paling laju. Sistem penapisan biologi menukarkan sisa ammonia kepada nitrat pada kecekapan maksimum. Nisbah tumbuhan-kepada-ikan berada dalam keadaan seimbang dan stabil.";
+            } else if (day > 75 && day <= 100) {
+                status = "Diminishing Return Phase";
+                wDesc = "Approaching adult threshold.";
+                rDesc = "Growth derivative decelerating.";
+                sDesc = "High oxygen demand stress.";
+                explanation = "Kadar kenaikan berat harian (derivatif) mula menurun akibat persaingan ruang dan had tangki. Walaupun berat keseluruhan meningkat, kecekapan penukaran makanan (FCR) mula merosot. Tingkatkan pengudaraan (Dissolved Oxygen) untuk menstabilkan sistem.";
+            } else {
+                status = "Maturity & Supply Stability";
+                wDesc = "Asymptotic weight stable.";
+                rDesc = "Derivative dropping near zero.";
+                sDesc = "Harvest time for Food Security.";
+                explanation = Derivatif $f'(x)$ menghampiri sifar. Membela ikan melepasi tempoh ini membazirkan kos palet makanan tanpa memberikan sebarang pertambahan biomas yang ketara. Masa terbaik untuk tuai bagi membekalkan protein segar ke pasaran domestik.;
+            }
+
+            hudStatus.innerText = status;
+            weightDesc.innerText = wDesc;
+            derivDesc.innerText = rDesc;
+            statusDesc.innerText = sDesc;
+            hudExplanation.innerHTML = explanation;
+        }// Live Re-rendering on Input Changes
+        function updateSimulation() {
+            // Update Text Valuations
+            lVal.innerText = ${lSlider.value} g;
+            rVal.innerText = parseFloat(rSlider.value).toFixed(3);
+            alphaVal.innerText = parseFloat(alphaSlider.value).toFixed(2);
+
+            // Re-calculate Curve Points
+            const updated = generateDataset();
+            aquaponicsChart.data.datasets[0].data = updated.weightData;
+            aquaponicsChart.data.datasets[1].data = updated.rateData;
+            
+            aquaponicsChart.update('none'); // Update smoothly
+            syncCalculusHUD();
+        }
+
+        // Attach Event Listeners
+        lSlider.addEventListener('input', updateSimulation);
+        rSlider.addEventListener('input', updateSimulation);
+        alphaSlider.addEventListener('input', updateSimulation);
+        daySlider.addEventListener('input', syncCalculusHUD);
+
+        // Initial Layout Initialization Run
+        updateSimulation();
+    </script>
+</body>
+</html>
